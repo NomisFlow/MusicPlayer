@@ -1,0 +1,5 @@
+#BlueJ class context
+comment0.params=newPosition
+comment0.target=void\ positionChanged(int)
+comment0.text=\n\ Wird\ vom\ MusicPlayer\ aufgerufen,\ wenn\ sich\ die\ Position\ im\ aktuellen\ Song\ \u00E4ndert.\n\ Dazu\ muss\ man\ sich\ beim\ MusicPlayer\ als\ MusicPlayerListener\ anmelden.\n\ @param\ newPosition\ Neue\ Position\ in\ Prozent.\n
+numComments=1
