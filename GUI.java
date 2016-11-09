@@ -2,24 +2,27 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
+
 public class GUI extends JFrame 
 {
     MusicPlayer m;
     JButton play;
     JButton pause;
     JButton close;
-    JLabel percentage;
-    
+    JProgressBar percentage;
+
     JTextField browser;
     JButton open;
-    
+
     public static void main(String[] args){
         GUI g = new GUI();
     }
 
     public GUI(){
         initComponents();
-
+        
+        
+        
     }
 
     private void initComponents(){
@@ -31,10 +34,15 @@ public class GUI extends JFrame
         play = new JButton("Play");
         pause = new JButton("Pause");
         close = new JButton("Close");
-        percentage = new JLabel("Fortschritt: __%");
+        percentage = new JProgressBar(0, 100);
+
+
 
         browser = new JTextField("song.mp3");
         open = new JButton("open");
+        percentage.setValue(m.getPositionInPercent());
+        percentage.setString("" + percentage.getValue());
+        percentage.setStringPainted(true);
 
         close.addActionListener(e -> beenden());
         open.addActionListener(e -> open());
@@ -42,21 +50,18 @@ public class GUI extends JFrame
         pause.addActionListener(e -> m.pause());
         play.addActionListener(e -> play());
         
-
+        
+       
         add(play);
         add(pause);
         add(percentage);
         add(browser);
         add(open);
         add(close);
-        
-        while(m.getPositionInPercent() <= 99){
-            percentage.setText("Fortschritt:" + m.getPositionInPercent() + " %");
-            
-        }
+
         
         pack();
-        setSize(450, 80);
+        setSize(750, 80);
     }
 
     private void beenden(){
@@ -69,18 +74,19 @@ public class GUI extends JFrame
         m.open(browser.getText());
         m.play();
     }
-    
+
     private void play(){
         if(m.getPositionInPercent() == 0)
             m.play();
         else if(m.getPositionInPercent() > 0)
             m.resume();
     }
-    
+
+
+
 
     
-    
-    // note the absence of mouseClicked…
+    // Every method of MouseListener except of MouseClicked()
     interface ClickedListener extends MouseListener
     {
         @Override

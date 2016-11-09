@@ -60,7 +60,7 @@ public class MusicPlayer {
     public int getPositionInPercent() {
         int audioLength = player.getLength() - startPos;
         int audioPos = player.getPosition() - startPos;
-        double fraq = audioPos * 1000 / 0.1 *audioLength;
+        double fraq = audioPos * 100 / audioLength;
         return (int) fraq;
     }
 
