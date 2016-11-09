@@ -11,4 +11,6 @@ comment4.params=
 comment4.target=void\ open()
 comment5.params=
 comment5.target=void\ play()
-numComments=6
+comment6.params=
+comment6.target=void\ countUp()
+numComments=7

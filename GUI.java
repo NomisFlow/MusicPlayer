@@ -2,29 +2,28 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-
 public class GUI extends JFrame 
 {
-    MusicPlayer m;
-    JButton play;
-    JButton pause;
-    JButton close;
-    JProgressBar percentage;
+    private MusicPlayer m;
+    private JButton play;
+    private JButton pause;
+    private JButton close;
+    private JProgressBar percentage;
 
-    JTextField browser;
-    JButton open;
+    private JTextField browser;
+    private JButton open;
 
     public static void main(String[] args){
         GUI g = new GUI();
+
     }
 
     public GUI(){
         initComponents();
-        
-        
-        
-    }
+        countUp();
 
+    }
+    
     private void initComponents(){
         m = new MusicPlayer();
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -35,13 +34,10 @@ public class GUI extends JFrame
         pause = new JButton("Pause");
         close = new JButton("Close");
         percentage = new JProgressBar(0, 100);
-
-
-
         browser = new JTextField("song.mp3");
         open = new JButton("open");
-        percentage.setValue(m.getPositionInPercent());
-        percentage.setString("" + percentage.getValue());
+        percentage.setValue(0);
+        percentage.setString("0");
         percentage.setStringPainted(true);
 
         close.addActionListener(e -> beenden());
@@ -49,9 +45,7 @@ public class GUI extends JFrame
         browser.addMouseListener((ClickedListener)(e -> browser.setText("")));
         pause.addActionListener(e -> m.pause());
         play.addActionListener(e -> play());
-        
-        
-       
+
         add(play);
         add(pause);
         add(percentage);
@@ -59,7 +53,6 @@ public class GUI extends JFrame
         add(open);
         add(close);
 
-        
         pack();
         setSize(750, 80);
     }
@@ -82,11 +75,15 @@ public class GUI extends JFrame
             m.resume();
     }
 
+    private void countUp(){
+        for(int i = percentage.getValue(); i <= 100; i = m.getPositionInPercent()){
+            percentage.setValue(m.getPositionInPercent());
+            percentage.setString("Fortschritt: " + m.getPositionInPercent() + "%");
+        }
 
+    }
 
-
-    
-    // Every method of MouseListener except of MouseClicked()
+    // Every method of MouseListener except for MouseClicked()
     interface ClickedListener extends MouseListener
     {
         @Override
